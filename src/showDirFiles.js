@@ -13,7 +13,7 @@ fs.readdir(repertoire, function (err, files) {
     }
     files.forEach(function (file) {
         let path = process.argv[2] + file
-        fs.readFile(file, 'utf-8', (err, data) => {
+        fs.readFile(path, 'utf-8', (err, data) => {
             console.log(data)
         })
     })
