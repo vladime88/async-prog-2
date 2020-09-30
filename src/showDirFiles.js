@@ -1,22 +1,20 @@
 import fs from 'fs'
-/*
-if (process.argv.length !== 4) {
-    console.log('usage: promiseCopyandOptionnel.js src dst')
+
+const repertoire = process.argv[2]
+
+if (process.argv.length !== 3) {
+    console.log('usage: showDirFiles.js dir')
     process.exit(1)
-  }
-  
-  let src = process.argv[2]
-  let dst = process.argv[3]
-  
-  try {
-    let stats = await fs.stat(`${src}`)
-    if (stats.isFile()) {
-      let content = await fs.readFile(`${src}`)
-      await fs.writeFile(`${dst}`, content)
-    } else {
-      console.log(`Error: ${src} is not a file.`)
+}
+
+fs.readdir(repertoire, function (err, files) {
+    if (err) {
+        return console.log(`Unable to open repertoire: `, err)
     }
-  } catch (e) {
-    console.error(e)
-  }
-  */
+    files.forEach(function (file) {
+        let path = process.argv[2] + file
+        fs.readFile(file, 'utf-8', (err, data) => {
+            console.log(data)
+        })
+    })
+})
